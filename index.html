@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STEPAN MINECRAFT</title>
+<style>
+body{background:#17251a;color:white;text-align:center;font-family:Arial}
+h1{color:#5cff68}
+canvas{width:100%;max-width:600px;image-rendering:pixelated}
+button{padding:15px;margin:5px;background:#369447;color:white;border:0;border-radius:8px}
+</style>
+</head>
+<body>
+<h1>⛏️ STEPAN MINECRAFT</h1>
+<p>Добро пожаловать в мой мир!</p>
+<canvas id="g" width="480" height="256"></canvas>
+<p>Блоки: <span id="s">0</span></p>
+<button onclick="move(-1)">⬅️</button>
+<button onclick="jump()">⬆️ Прыжок</button>
+<button onclick="move(1)">➡️</button>
+<button onclick="mine()">⛏️ Ломать блок</button>
+<script>
+const c=document.getElementById('g'),x=c.getContext('2d');
+let p=2,s=0,y=0;
+function draw(){
+x.fillStyle='#82d5ff';x.fillRect(0,0,480,256);
+for(let i=0;i<15;i++){
+x.fillStyle='#54ad40';x.fillRect(i*32,192,32,32);
+x.fillStyle='#80502e';x.fillRect(i*32,224,32,32);
+}
+x.fillStyle='#e4b386';x.fillRect(p*32,160-y,24,32);
+x.fillStyle='#3479e9';x.fillRect(p*32,176-y,24,16);
+document.getElementById('s').textContent=s;
+}
+function move(d){p=Math.max(0,Math.min(14,p+d));draw()}
+function jump(){y=60;draw();setTimeout(()=>{y=0;draw()},500)}
+function mine(){s++;draw()}
+draw();
+</script>
+</body>
+</html>
